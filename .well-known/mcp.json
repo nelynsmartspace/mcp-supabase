@@ -1,0 +1,10 @@
+{
+  "name": "Supabase",
+  "description": "Managed Supabase MCP connection",
+  "endpoints": [
+    {
+      "type": "mcp",
+      "url": "https://mcp.supabase.com/mcp?project_ref=opchdiaepihfxsihiuwv"
+    }
+  ]
+}
