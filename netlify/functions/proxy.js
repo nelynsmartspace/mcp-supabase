@@ -1,22 +1,17 @@
 // netlify/functions/proxy.js
 
 export async function handler(event) {
-  // Replace this with your own project ref
-  const targetBase = "https://opchdiaepihfxsihiuwv.supabase.co/rest/v1/";
-
-  // Construct the full target URL (pass through the path from the request)
-  const path = event.queryStringParameters?.path || "";
-  const target = `${targetBase}${path}`;
+  // The official MCP endpoint for your Supabase project
+  const target = "https://mcp.supabase.com/mcp?project_ref=opchdiaepihfxsihiuwv";
 
   try {
     const response = await fetch(target, {
       method: event.httpMethod,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-        apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, // needed by Supabase REST
+        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
       },
-      body: event.httpMethod !== "GET" && event.body ? event.body : undefined,
+      body: event.httpMethod !== "GET" ? event.body : undefined,
     });
 
     const text = await response.text();
